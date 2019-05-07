@@ -17,6 +17,7 @@
  * under the License.
  */
 
+// @ts-ignore
 import { Legacy } from 'kibana';
 
 export type CoreShim = object;
@@ -32,22 +33,21 @@ export default function(kibana: any) {
         main: 'plugins/game_of_actions',
       },
       embeddableActions: [
-        'plugins/embeddable_api/__test__/actions/hello_world_action',
-        'plugins/embeddable_api/__test__/actions/say_hello_action',
-        'plugins/embeddable_api/__test__/actions/ride_dragon_action',
-        'plugins/embeddable_api/__test__/actions/send_urgent_message_action',
+        'plugins/game_of_actions/actions/hello_world_action',
+        'plugins/game_of_actions/actions/say_hello_action',
+        'plugins/game_of_actions/actions/ride_dragon_action',
+        'plugins/game_of_actions/actions/send_urgent_message_action',
         // 'plugins/embeddable_api/__test__/actions/dynamic_send_message_action',
         // 'plugins/embeddable_api/__test__/actions/get_knighted_action',
         //    'plugins/kbn_tp_embeddable_explorer/actions/edit_mode_action',
       ],
       embeddableFactories: [
-        'plugins/embeddable_api/__test__/embeddables/hello_world/hello_world_embeddable_factory',
+        'plugins/game_of_actions/embeddables/hello_world/hello_world_embeddable_factory',
+        'plugins/game_of_actions/embeddables/contact_card/contact_card_embeddable_factory',
       ],
     },
     init(server: Legacy.Server) {
-      server.injectUiAppVars('kbn_tp_embeddable_explorer', async () =>
-        server.getInjectedUiAppVars('kibana')
-      );
+      server.injectUiAppVars('game_of_actions', async () => server.getInjectedUiAppVars('kibana'));
     },
   });
 }

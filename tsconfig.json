@@ -1,14 +1,34 @@
 {
-  "extends": "../kibana/tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./target",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      // Allows for importing from `kibana` package for the exported types.
+      "kibana": ["../../kibana"],
+      "kibana/public": ["../../src/core/public"],
+      "kibana/server": ["../../src/core/server"],
+      "plugins/*": ["../../src/legacy/core_plugins/*/public/"],
+      "ui/*": [
+        "../../src/legacy/ui/public/*"
+      ],
+      "test_utils/*": [
+        "../../src/test_utils/public/*"
+      ],
+      "plugins/dashboard_embeddable/*": [
+        "../../src/legacy/core_plugins/dashboard_embeddable/public/*"
+      ],
+      "plugins/embeddable_api/*": [
+        "../../src/legacy/core_plugins/embeddable_api/public/*"
+      ],
+    },
   },
   "include": [
     "index.ts",
     "public/**/*.ts",
     "public/**/*.tsx",
-    "../../../../typings/**/*",
+    "../typings/**/*",
   ],
   "exclude": []
 }

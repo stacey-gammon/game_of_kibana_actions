@@ -8,22 +8,24 @@
     "templateVersion": "1.0.0"
   },
   "scripts": {
-    "preinstall": "node ../kibana/preinstall_check",
-    "kbn": "node ../kibana/scripts/kbn",
-    "es": "node ../kibana/scripts/es",
-    "lint": "eslint .",
+    "preinstall": "node ../../preinstall_check",
+    "kbn": "node ../../scripts/kbn",
+    "es": "node ../../scripts/es",
+    "lint": "eslint ../..",
     "start": "plugin-helpers start",
     "test:server": "plugin-helpers test:server",
     "test:browser": "plugin-helpers test:browser",
     "build": "plugin-helpers build"
   },
   "devDependencies": {
-    "@elastic/eslint-config-kibana": "link:../kibana/packages/eslint-config-kibana",
-    "@elastic/eslint-import-resolver-kibana": "link:../kibana/packages/kbn-eslint-import-resolver-kibana",
-    "@kbn/expect": "link:../kibana/packages/kbn-expect",
-    "@kbn/plugin-helpers": "link:../kibana/packages/kbn-plugin-helpers",
+    "@elastic/eslint-config-kibana": "link:../../packages/eslint-config-kibana",
+    "@elastic/eslint-import-resolver-kibana": "link:../../packages/kbn-eslint-import-resolver-kibana",
+    "@kbn/eslint-plugin-eslint": "link:../../packages/kbn-eslint-plugin-eslint",
+    "@kbn/expect": "link:../../packages/kbn-expect",
+    "@kbn/plugin-helpers": "link:../../packages/kbn-plugin-helpers",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jest": "^22.4.1",
@@ -31,7 +33,10 @@
     "eslint-plugin-mocha": "^5.3.0",
     "eslint-plugin-no-unsanitized": "^3.0.2",
     "eslint-plugin-prefer-object-spread": "^1.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
+    "prettier": "^1.14.3",
     "typescript": "^3.3.3333"
-  }
+  },
+  "dependencies": {}
 }
