@@ -111,4 +111,4 @@ export class GotCharacterCardEmbeddableFactory extends EmbeddableFactory<
   }
 }
 
-// embeddableFactories.registerFactory(new GotCharacterCardEmbeddableFactory());
+embeddableFactories.registerFactory(new GotCharacterCardEmbeddableFactory());

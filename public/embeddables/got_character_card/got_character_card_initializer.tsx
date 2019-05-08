@@ -53,7 +53,7 @@ export class GotCharacterCardInitializer extends Component<
     return (
       <div>
         <EuiModalHeader>
-          <EuiModalHeaderTitle>Create a new greeting card</EuiModalHeaderTitle>
+          <EuiModalHeaderTitle>Create a new Game of Thrones character card</EuiModalHeaderTitle>
         </EuiModalHeader>
 
         <EuiModalBody>

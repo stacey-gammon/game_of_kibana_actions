@@ -45,6 +45,7 @@ export interface GotCharacterCardEmbeddableOutput extends EmbeddableOutput {
   fullName: string;
   sigilImageUrl: string;
   originalLastName: string;
+  mood: string;
 }
 
 function getFullName(input: GotCharacterCardEmbeddableInput) {
@@ -69,6 +70,18 @@ function getSigilImageUrl(lastName: string) {
   }
 }
 
+function getOutputMood(input: GotCharacterCardEmbeddableInput) {
+  if (!input.isAlive) {
+    return 'nothing because they are dead';
+  }
+
+  if ((input.firstName + ' ' + input.lastName).toLowerCase() === 'a girl has no name') {
+    return 'nothing because she is no one';
+  }
+
+  return input.mood;
+}
+
 export class GotCharacterCardEmbeddable extends Embeddable<
   GotCharacterCardEmbeddableInput,
   GotCharacterCardEmbeddableOutput
@@ -84,6 +97,7 @@ export class GotCharacterCardEmbeddable extends Embeddable<
         fullName: getFullName(initialInput),
         originalLastName: initialInput.lastName,
         sigilImageUrl: getSigilImageUrl(initialInput.lastName),
+        mood: getOutputMood(initialInput),
       },
       parent
     );
@@ -94,6 +108,7 @@ export class GotCharacterCardEmbeddable extends Embeddable<
         fullName,
         sigilImageUrl: getSigilImageUrl(this.input.lastName),
         title: `Hello ${fullName}`,
+        mood: getOutputMood(initialInput),
       });
     });
   }

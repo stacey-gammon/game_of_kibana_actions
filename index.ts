@@ -35,11 +35,9 @@ export default function(kibana: any) {
       embeddableActions: [
         'plugins/game_of_actions/actions/ride_dragon_action',
         'plugins/game_of_actions/actions/send_urgent_message_action',
-        // 'plugins/embeddable_api/__test__/actions/dynamic_send_message_action',
-        'plugins/game_of_actions/actions/get_knighted_action',
       ],
       embeddableFactories: [
-        // 'plugins/game_of_actions/embeddables/got_character_card/got_character_card_embeddable_factory',
+        'plugins/game_of_actions/embeddables/got_character_card/got_character_card_embeddable_factory',
       ],
     },
     init(server: Legacy.Server) {

@@ -22,6 +22,7 @@ import {
   ActionContext,
   ExecuteActionContext,
   actionRegistry,
+  IncompatibleActionError,
 } from 'plugins/embeddable_api/index';
 import { Location } from '../embeddables/got_character_card';
 import { GotCharacterCardEmbeddable } from '../embeddables';
@@ -46,7 +47,7 @@ export class RelocateAction extends Action {
     context: ExecuteActionContext<GotCharacterCardEmbeddable, { targetLocation: Location }>
   ) {
     if (!context.triggerContext) {
-      return;
+      throw new IncompatibleActionError();
     }
 
     context.embeddable.updateInput({ location: context.triggerContext.targetLocation });

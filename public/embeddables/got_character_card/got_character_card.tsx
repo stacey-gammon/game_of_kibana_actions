@@ -68,7 +68,7 @@ export class GotCharacterCardEmbeddableComponent extends React.Component<Props, 
       sigilUrl: this.props.embeddable.getOutput().sigilImageUrl,
       isAlive: this.props.embeddable.getInput().isAlive,
       firstName: this.props.embeddable.getInput().firstName,
-      mood: this.props.embeddable.getInput().mood,
+      mood: this.props.embeddable.getOutput().mood,
       location: this.props.embeddable.getInput().location,
       targetLocation: this.props.embeddable.getInput().location,
     };
@@ -86,7 +86,7 @@ export class GotCharacterCardEmbeddableComponent extends React.Component<Props, 
           sigilUrl: this.props.embeddable.getOutput().sigilImageUrl,
           isAlive: this.props.embeddable.getInput().isAlive,
           firstName: this.props.embeddable.getInput().firstName,
-          mood: this.props.embeddable.getInput().mood,
+          mood: this.props.embeddable.getOutput().mood,
           location: this.props.embeddable.getInput().location,
           targetLocation: this.props.embeddable.getInput().location,
         });
@@ -166,7 +166,7 @@ export class GotCharacterCardEmbeddableComponent extends React.Component<Props, 
         footer={this.getCardFooterContent()}
         description={`${this.state.firstName}, currently located at ${
           this.state.location
-        }, is feeling ${this.state.isAlive ? this.state.mood : 'nothing because they are dead'}`}
+        }, is feeling ${this.state.mood}`}
       />
     );
   }

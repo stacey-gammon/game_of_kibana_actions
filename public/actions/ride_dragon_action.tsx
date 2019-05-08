@@ -24,11 +24,25 @@ import {
   actionRegistry,
   triggerRegistry,
   CONTEXT_MENU_TRIGGER,
+  EmbeddableInput,
+  Embeddable,
+  IEmbeddable,
 } from 'plugins/embeddable_api/index';
-import { GotCharacterCardEmbeddable } from '../embeddables';
-import { GOT_CHARACTER_CARD_EMBEDDABLE } from '../embeddables/got_character_card/got_character_card_embeddable_factory';
 
 export const RIDE_DRAGON = 'RIDE_DRAGON';
+
+export interface RideDragonEmbeddableInput extends EmbeddableInput {
+  lastName: string;
+  mood: string;
+  isAlive: boolean;
+}
+
+export function isCompatibleEmbeddable(
+  embeddable: IEmbeddable | Embeddable<RideDragonEmbeddableInput, any>
+) {
+  const input = (embeddable as Embeddable<RideDragonEmbeddableInput, any>).getInput();
+  return input.lastName !== undefined && input.isAlive !== undefined && input.mood !== undefined;
+}
 
 export class RideDragonAction extends Action {
   constructor() {
@@ -39,16 +53,16 @@ export class RideDragonAction extends Action {
     return 'Ride dragon';
   }
 
-  async isCompatible(context: ActionContext<GotCharacterCardEmbeddable>) {
+  async isCompatible(context: ActionContext<Embeddable<RideDragonEmbeddableInput, any>>) {
     return (
-      context.embeddable.type === GOT_CHARACTER_CARD_EMBEDDABLE &&
+      isCompatibleEmbeddable(context.embeddable) &&
       context.embeddable.getInput().lastName === 'Targaryen'
     );
   }
 
-  async execute(context: ExecuteActionContext<GotCharacterCardEmbeddable>) {
+  async execute(context: ExecuteActionContext<Embeddable<RideDragonEmbeddableInput, any>>) {
     if (context.embeddable.getInput().lastName === 'Targaryen') {
-      context.embeddable.updateInput({ mood: 'high' });
+      context.embeddable.updateInput({ mood: 'happy' });
     } else {
       context.embeddable.updateInput({ isAlive: false });
     }
