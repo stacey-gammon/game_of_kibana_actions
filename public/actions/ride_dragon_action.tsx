@@ -25,8 +25,8 @@ import {
   triggerRegistry,
   CONTEXT_MENU_TRIGGER,
 } from 'plugins/embeddable_api/index';
-import { ContactCardEmbeddable } from '../embeddables';
-import { CONTACT_CARD_EMBEDDABLE } from '../embeddables/contact_card/contact_card_embeddable_factory';
+import { GotCharacterCardEmbeddable } from '../embeddables';
+import { GOT_CHARACTER_CARD_EMBEDDABLE } from '../embeddables/got_character_card/got_character_card_embeddable_factory';
 
 export const RIDE_DRAGON = 'RIDE_DRAGON';
 
@@ -39,14 +39,14 @@ export class RideDragonAction extends Action {
     return 'Ride dragon';
   }
 
-  async isCompatible(context: ActionContext<ContactCardEmbeddable>) {
+  async isCompatible(context: ActionContext<GotCharacterCardEmbeddable>) {
     return (
-      context.embeddable.type === CONTACT_CARD_EMBEDDABLE &&
+      context.embeddable.type === GOT_CHARACTER_CARD_EMBEDDABLE &&
       context.embeddable.getInput().lastName === 'Targaryen'
     );
   }
 
-  async execute(context: ExecuteActionContext<ContactCardEmbeddable>) {
+  async execute(context: ExecuteActionContext<GotCharacterCardEmbeddable>) {
     if (context.embeddable.getInput().lastName === 'Targaryen') {
       context.embeddable.updateInput({ mood: 'high' });
     } else {

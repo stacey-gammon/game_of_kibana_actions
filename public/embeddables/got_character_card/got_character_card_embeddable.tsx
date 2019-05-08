@@ -16,20 +16,23 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { Embeddable, EmbeddableInput } from 'plugins/embeddable_api/index';
+import {
+  Embeddable,
+  EmbeddableInput,
+  triggerRegistry,
+  Container,
+  EmbeddableOutput,
+} from 'plugins/embeddable_api/index';
 import React from 'react';
 import ReactDom from 'react-dom';
-import { EmbeddableOutput } from 'plugins/embeddable_api/embeddables';
-import { Container } from 'plugins/embeddable_api/containers';
 import { Subscription } from 'rxjs';
-import { triggerRegistry } from 'plugins/embeddable_api/triggers';
-import { CONTACT_CARD_EMBEDDABLE } from './contact_card_embeddable_factory';
-import { ContactCardEmbeddableComponent } from './contact_card';
-import { SEND_MESSAGE_ACTION } from '../../actions/send_message_action';
+import { SEND_MESSAGE_ACTION } from 'plugins/embeddable_api/__test__';
+import { GOT_CHARACTER_CARD_EMBEDDABLE } from './got_character_card_embeddable_factory';
+import { GotCharacterCardEmbeddableComponent } from './got_character_card';
 import { WAR_COUNCIL_ACTION } from '../../actions/war_council_action';
 import { RELOCATE_ACTION } from '../../actions/relocate_action';
 
-export interface ContactCardEmbeddableInput extends EmbeddableInput {
+export interface GotCharacterCardEmbeddableInput extends EmbeddableInput {
   firstName: string;
   lastName: string;
   nameTitle?: string;
@@ -38,13 +41,13 @@ export interface ContactCardEmbeddableInput extends EmbeddableInput {
   location: string;
 }
 
-export interface ContactCardEmbeddableOutput extends EmbeddableOutput {
+export interface GotCharacterCardEmbeddableOutput extends EmbeddableOutput {
   fullName: string;
   sigilImageUrl: string;
   originalLastName: string;
 }
 
-function getFullName(input: ContactCardEmbeddableInput) {
+function getFullName(input: GotCharacterCardEmbeddableInput) {
   const { nameTitle, firstName, lastName } = input;
   const nameParts = [nameTitle, firstName, lastName].filter(name => name !== undefined);
   return nameParts.join(' ');
@@ -66,16 +69,16 @@ function getSigilImageUrl(lastName: string) {
   }
 }
 
-export class ContactCardEmbeddable extends Embeddable<
-  ContactCardEmbeddableInput,
-  ContactCardEmbeddableOutput
+export class GotCharacterCardEmbeddable extends Embeddable<
+  GotCharacterCardEmbeddableInput,
+  GotCharacterCardEmbeddableOutput
 > {
   private subscription: Subscription;
   private node?: Element;
+  public readonly type = GOT_CHARACTER_CARD_EMBEDDABLE;
 
-  constructor(initialInput: ContactCardEmbeddableInput, parent?: Container) {
+  constructor(initialInput: GotCharacterCardEmbeddableInput, parent?: Container) {
     super(
-      CONTACT_CARD_EMBEDDABLE,
       initialInput,
       {
         fullName: getFullName(initialInput),
@@ -97,7 +100,7 @@ export class ContactCardEmbeddable extends Embeddable<
 
   public render(node: HTMLElement) {
     this.node = node;
-    ReactDom.render(<ContactCardEmbeddableComponent embeddable={this} />, node);
+    ReactDom.render(<GotCharacterCardEmbeddableComponent embeddable={this} />, node);
   }
 
   public destroy() {
@@ -111,10 +114,10 @@ export class ContactCardEmbeddable extends Embeddable<
   public reload() {}
 }
 
-export const CONTACT_USER_TRIGGER = 'CONTACT_USER_TRIGGER';
+export const CONTACT_CHARACTER_TRIGGER = 'CONTACT_CHARACTER_TRIGGER';
 
 triggerRegistry.registerTrigger({
-  id: CONTACT_USER_TRIGGER,
+  id: CONTACT_CHARACTER_TRIGGER,
   actionIds: [SEND_MESSAGE_ACTION],
 });
 

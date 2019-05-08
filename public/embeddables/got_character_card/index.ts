@@ -16,34 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { Adapters } from 'ui/inspector';
-import {
-  Filter,
-  IContainer,
-  EmbeddableOutput,
-  EmbeddableInput,
-  Embeddable,
-} from 'plugins/embeddable_api/index';
 
-export const FILTERABLE_EMBEDDABLE = 'FILTERABLE_EMBEDDABLE';
+export {
+  GotCharacterCardEmbeddable,
+  GotCharacterCardEmbeddableInput,
+  GotCharacterCardEmbeddableOutput,
+} from './got_character_card_embeddable';
 
-export interface FilterableEmbeddableInput extends EmbeddableInput {
-  filters: Filter[];
-}
+export {
+  GotCharacterCardEmbeddableFactory,
+  GOT_CHARACTER_CARD_EMBEDDABLE,
+} from './got_character_card_embeddable_factory';
+export { GotCharacterCardInitializerProps } from './got_character_card_initializer';
 
-export class FilterableEmbeddable extends Embeddable<FilterableEmbeddableInput, EmbeddableOutput> {
-  constructor(initialInput: FilterableEmbeddableInput, parent?: IContainer) {
-    super(FILTERABLE_EMBEDDABLE, initialInput, {}, parent);
-  }
-
-  public getInspectorAdapters() {
-    const inspectorAdapters: Adapters = {
-      filters: `My filters are ${JSON.stringify(this.input.filters)}`,
-    };
-    return inspectorAdapters;
-  }
-
-  public render() {}
-
-  public reload() {}
-}
+export { Location } from './got_character_card';

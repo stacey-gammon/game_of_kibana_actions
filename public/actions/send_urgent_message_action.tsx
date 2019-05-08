@@ -27,10 +27,10 @@ import {
   triggerRegistry,
   IncompatibleActionError,
 } from 'plugins/embeddable_api/index';
-import { ContactCardEmbeddable } from '../embeddables';
-import { CONTACT_CARD_EMBEDDABLE } from '../embeddables/contact_card/slow_contact_card_embeddable_factory';
+import { GotCharacterCardEmbeddable } from '../embeddables';
+import { GOT_CHARACTER_CARD_EMBEDDABLE } from '../embeddables/got_character_card/got_character_card_embeddable_factory';
 import { GetMessageModal } from './get_message_modal';
-import { CONTACT_USER_TRIGGER } from '../embeddables/contact_card/contact_card_embeddable';
+import { CONTACT_CHARACTER_TRIGGER } from '../embeddables/got_character_card/got_character_card_embeddable';
 
 export const SEND_URGENT_MESSAGE_ACTION = 'SEND_URGENT_MESSAGE_ACTION';
 
@@ -43,11 +43,11 @@ export class SendUrgentMessageAction extends Action {
     return 'Send urgent message';
   }
 
-  async isCompatible(context: ActionContext<ContactCardEmbeddable>) {
-    return context.embeddable.type === CONTACT_CARD_EMBEDDABLE;
+  async isCompatible(context: ActionContext<GotCharacterCardEmbeddable>) {
+    return context.embeddable.type === GOT_CHARACTER_CARD_EMBEDDABLE;
   }
 
-  async sendMessage(context: ExecuteActionContext<ContactCardEmbeddable>, message: string) {
+  async sendMessage(context: ExecuteActionContext<GotCharacterCardEmbeddable>, message: string) {
     const greeting = `HELP ${context.embeddable
       .getOutput()
       .fullName.toUpperCase()}!!!!! !!! IMPORTANT!!! READ ME NOW!!`;
@@ -62,7 +62,7 @@ export class SendUrgentMessageAction extends Action {
     );
   }
 
-  async execute(context: ExecuteActionContext<ContactCardEmbeddable, { message?: string }>) {
+  async execute(context: ExecuteActionContext<GotCharacterCardEmbeddable, { message?: string }>) {
     if (!(await this.isCompatible(context))) {
       throw new IncompatibleActionError();
     }
@@ -82,6 +82,6 @@ export class SendUrgentMessageAction extends Action {
 actionRegistry.addAction(new SendUrgentMessageAction());
 
 triggerRegistry.attachAction({
-  triggerId: CONTACT_USER_TRIGGER,
+  triggerId: CONTACT_CHARACTER_TRIGGER,
   actionId: SEND_URGENT_MESSAGE_ACTION,
 });

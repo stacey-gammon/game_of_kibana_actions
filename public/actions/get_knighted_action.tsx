@@ -25,8 +25,8 @@ import {
   triggerRegistry,
   CONTEXT_MENU_TRIGGER,
 } from 'plugins/embeddable_api/index';
-import { ContactCardEmbeddable } from '../embeddables';
-import { CONTACT_CARD_EMBEDDABLE } from '../embeddables/contact_card/contact_card_embeddable_factory';
+import { GotCharacterCardEmbeddable } from '../embeddables';
+import { GOT_CHARACTER_CARD_EMBEDDABLE } from '../embeddables/got_character_card/got_character_card_embeddable_factory';
 
 export const GET_KNIGHTED = 'GET_KNIGHTED';
 
@@ -39,11 +39,11 @@ export class GetKnightedAction extends Action {
     return 'Get Knighted';
   }
 
-  async isCompatible(context: ActionContext<ContactCardEmbeddable>) {
-    return context.embeddable.type === CONTACT_CARD_EMBEDDABLE;
+  async isCompatible(context: ActionContext<GotCharacterCardEmbeddable>) {
+    return context.embeddable.type === GOT_CHARACTER_CARD_EMBEDDABLE;
   }
 
-  async execute(context: ExecuteActionContext<ContactCardEmbeddable>) {
+  async execute(context: ExecuteActionContext<GotCharacterCardEmbeddable>) {
     context.embeddable.updateInput({ nameTitle: 'Sir' });
   }
 }

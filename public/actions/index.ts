@@ -16,6 +16,3 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-export { HelloWorldAction, HELLO_WORLD_ACTION_ID } from './hello_world_action';
-export { SayHelloAction } from './say_hello_action';

@@ -30,7 +30,7 @@ import {
 } from '@elastic/eui';
 import React, { Component } from 'react';
 
-export interface ContactCardInitializerProps {
+export interface GotCharacterCardInitializerProps {
   onCreate: (name: { lastName: string; firstName: string }) => void;
   onCancel: () => void;
 }
@@ -40,8 +40,11 @@ interface State {
   lastName?: string;
 }
 
-export class ContactCardInitializer extends Component<ContactCardInitializerProps, State> {
-  constructor(props: ContactCardInitializerProps) {
+export class GotCharacterCardInitializer extends Component<
+  GotCharacterCardInitializerProps,
+  State
+> {
+  constructor(props: GotCharacterCardInitializerProps) {
     super(props);
     this.state = {};
   }

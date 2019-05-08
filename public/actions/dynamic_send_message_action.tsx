@@ -19,18 +19,18 @@
 import React from 'react';
 import { getNewPlatform } from 'ui/new_platform';
 import { EuiFlyoutBody, EuiCallOut, EuiFlyoutHeader } from '@elastic/eui';
-import { triggerRegistry } from '../../triggers';
 import {
   Action,
   ActionContext,
   ExecuteActionContext,
   actionRegistry,
   IncompatibleActionError,
-} from '../../actions';
-import { ContactCardEmbeddable } from '../embeddables';
-import { CONTACT_CARD_EMBEDDABLE } from '../embeddables/contact_card';
+  triggerRegistry,
+} from 'plugins/embeddable_api/index';
+import { GotCharacterCardEmbeddable } from '../embeddables';
+import { GOT_CHARACTER_CARD_EMBEDDABLE } from '../embeddables/got_character_card';
 import { GetMessageModal } from './get_message_modal';
-import { CONTACT_USER_TRIGGER } from '../embeddables/contact_card/contact_card_embeddable';
+import { CONTACT_CHARACTER_TRIGGER } from '../embeddables/got_character_card/got_character_card_embeddable';
 
 export const DYNAMIC_SEND_MESSAGE_ACTION = 'DYNAMIC_SEND_MESSAGE_ACTION';
 
@@ -45,11 +45,11 @@ export class DynamicSendMessageAction extends Action {
     return this.isEmergency ? 'Send urgent message via dragon' : 'Send status update via raven';
   }
 
-  async isCompatible(context: ActionContext<ContactCardEmbeddable>) {
-    return context.embeddable.type === CONTACT_CARD_EMBEDDABLE;
+  async isCompatible(context: ActionContext<GotCharacterCardEmbeddable>) {
+    return context.embeddable.type === GOT_CHARACTER_CARD_EMBEDDABLE;
   }
 
-  async sendMessage(context: ExecuteActionContext<ContactCardEmbeddable>, message: string) {
+  async sendMessage(context: ExecuteActionContext<GotCharacterCardEmbeddable>, message: string) {
     const greeting = this.isEmergency
       ? `HELP ${context.embeddable
           .getOutput()
@@ -70,7 +70,7 @@ export class DynamicSendMessageAction extends Action {
     );
   }
 
-  async execute(context: ExecuteActionContext<ContactCardEmbeddable, { message?: string }>) {
+  async execute(context: ExecuteActionContext<GotCharacterCardEmbeddable, { message?: string }>) {
     if (!(await this.isCompatible(context))) {
       throw new IncompatibleActionError();
     }
@@ -90,5 +90,11 @@ export class DynamicSendMessageAction extends Action {
 actionRegistry.addAction(new DynamicSendMessageAction(true, 'sendUrgentMessage'));
 actionRegistry.addAction(new DynamicSendMessageAction(false, 'sendStatusUpdate'));
 
-triggerRegistry.attachAction({ triggerId: CONTACT_USER_TRIGGER, actionId: 'sendUrgentMessage' });
-triggerRegistry.attachAction({ triggerId: CONTACT_USER_TRIGGER, actionId: 'sendStatusUpdate' });
+triggerRegistry.attachAction({
+  triggerId: CONTACT_CHARACTER_TRIGGER,
+  actionId: 'sendUrgentMessage',
+});
+triggerRegistry.attachAction({
+  triggerId: CONTACT_CHARACTER_TRIGGER,
+  actionId: 'sendStatusUpdate',
+});

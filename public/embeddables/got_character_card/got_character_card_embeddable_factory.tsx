@@ -22,23 +22,24 @@ import { embeddableFactories, EmbeddableFactory } from 'plugins/embeddable_api/i
 import { Container } from 'plugins/embeddable_api/containers';
 import { i18n } from '@kbn/i18n';
 import { getNewPlatform } from 'ui/new_platform';
-import { ContactCardEmbeddable, ContactCardEmbeddableInput } from './contact_card_embeddable';
-import { ContactCardInitializer } from './contact_card_initializer';
-import { Location } from './contact_card';
+import {
+  GotCharacterCardEmbeddable,
+  GotCharacterCardEmbeddableInput,
+} from './got_character_card_embeddable';
+import { GotCharacterCardInitializer } from './got_character_card_initializer';
+import { Location } from './got_character_card';
 
-export const CONTACT_CARD_EMBEDDABLE = 'CONTACT_CARD_EMBEDDABLE';
+export const GOT_CHARACTER_CARD_EMBEDDABLE = 'GOT_CHARACTER_CARD_EMBEDDABLE';
 
 function randomlyChoose<T>(options: T[]): T {
   const index = Math.floor(Math.random() * options.length);
   return options[index];
 }
 
-export class ContactCardEmbeddableFactory extends EmbeddableFactory<ContactCardEmbeddableInput> {
-  constructor() {
-    super({
-      name: CONTACT_CARD_EMBEDDABLE,
-    });
-  }
+export class GotCharacterCardEmbeddableFactory extends EmbeddableFactory<
+  GotCharacterCardEmbeddableInput
+> {
+  public readonly type = GOT_CHARACTER_CARD_EMBEDDABLE;
 
   public isEditable() {
     return true;
@@ -74,7 +75,7 @@ export class ContactCardEmbeddableFactory extends EmbeddableFactory<ContactCardE
     }
   }
 
-  public getDefaultInput(partial: Partial<ContactCardEmbeddableInput>) {
+  public getDefaultInput(partial: Partial<GotCharacterCardEmbeddableInput>) {
     return {
       isAlive: true,
       mood: this.getDefaultMood(partial.lastName),
@@ -84,14 +85,14 @@ export class ContactCardEmbeddableFactory extends EmbeddableFactory<ContactCardE
 
   public getDisplayName() {
     return i18n.translate('kbn.embeddable.samples.contactCard.displayName', {
-      defaultMessage: 'contact card',
+      defaultMessage: 'character card',
     });
   }
 
-  public getExplicitInput(): Promise<Partial<ContactCardEmbeddableInput>> {
+  public getExplicitInput(): Promise<Partial<GotCharacterCardEmbeddableInput>> {
     return new Promise(resolve => {
       const modalSession = getNewPlatform().start.core.overlays.openModal(
-        <ContactCardInitializer
+        <GotCharacterCardInitializer
           onCancel={() => {
             modalSession.close();
             resolve(undefined);
@@ -100,17 +101,14 @@ export class ContactCardEmbeddableFactory extends EmbeddableFactory<ContactCardE
             modalSession.close();
             resolve(input);
           }}
-        />,
-        {
-          'data-test-subj': 'createContactCardEmbeddable',
-        }
+        />
       );
     });
   }
 
-  public async create(initialInput: ContactCardEmbeddableInput, parent?: Container) {
-    return new ContactCardEmbeddable(initialInput, parent);
+  public async create(initialInput: GotCharacterCardEmbeddableInput, parent?: Container) {
+    return new GotCharacterCardEmbeddable(initialInput, parent);
   }
 }
 
-embeddableFactories.registerFactory(new ContactCardEmbeddableFactory());
+// embeddableFactories.registerFactory(new GotCharacterCardEmbeddableFactory());

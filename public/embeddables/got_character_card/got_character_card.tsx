@@ -32,13 +32,13 @@ import { EuiButton } from '@elastic/eui';
 import { executeTriggerActions } from 'plugins/embeddable_api/triggers';
 import * as Rx from 'rxjs';
 import {
-  ContactCardEmbeddable,
-  CONTACT_USER_TRIGGER,
+  GotCharacterCardEmbeddable,
+  CONTACT_CHARACTER_TRIGGER,
   CHANGE_LOCATION_TRIGGER,
-} from './contact_card_embeddable';
+} from './got_character_card_embeddable';
 
 interface Props {
-  embeddable: ContactCardEmbeddable;
+  embeddable: GotCharacterCardEmbeddable;
 }
 
 interface State {
@@ -57,7 +57,7 @@ export enum Location {
   BEYOND_THE_WALL = 'Beyond the Wall',
 }
 
-export class ContactCardEmbeddableComponent extends React.Component<Props, State> {
+export class GotCharacterCardEmbeddableComponent extends React.Component<Props, State> {
   private subscription?: Subscription;
   private mounted: boolean = false;
 
@@ -102,7 +102,7 @@ export class ContactCardEmbeddableComponent extends React.Component<Props, State
   }
 
   emitContactTrigger = () => {
-    executeTriggerActions(CONTACT_USER_TRIGGER, {
+    executeTriggerActions(CONTACT_CHARACTER_TRIGGER, {
       embeddable: this.props.embeddable,
       triggerContext: {},
     });

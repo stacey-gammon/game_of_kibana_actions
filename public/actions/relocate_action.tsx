@@ -23,9 +23,9 @@ import {
   ExecuteActionContext,
   actionRegistry,
 } from 'plugins/embeddable_api/index';
-import { Location } from '../embeddables/contact_card';
-import { ContactCardEmbeddable } from '../embeddables';
-import { CONTACT_CARD_EMBEDDABLE } from '../embeddables/contact_card/contact_card_embeddable_factory';
+import { Location } from '../embeddables/got_character_card';
+import { GotCharacterCardEmbeddable } from '../embeddables';
+import { GOT_CHARACTER_CARD_EMBEDDABLE } from '../embeddables/got_character_card/got_character_card_embeddable_factory';
 
 export const RELOCATE_ACTION = 'RELOCATE_ACTION';
 
@@ -38,12 +38,12 @@ export class RelocateAction extends Action {
     return 'Relocate';
   }
 
-  async isCompatible(context: ActionContext<ContactCardEmbeddable>) {
-    return context.embeddable.type === CONTACT_CARD_EMBEDDABLE;
+  async isCompatible(context: ActionContext<GotCharacterCardEmbeddable>) {
+    return context.embeddable.type === GOT_CHARACTER_CARD_EMBEDDABLE;
   }
 
   async execute(
-    context: ExecuteActionContext<ContactCardEmbeddable, { targetLocation: Location }>
+    context: ExecuteActionContext<GotCharacterCardEmbeddable, { targetLocation: Location }>
   ) {
     if (!context.triggerContext) {
       return;
