@@ -28,6 +28,11 @@ import { Location } from './contact_card';
 
 export const CONTACT_CARD_EMBEDDABLE = 'CONTACT_CARD_EMBEDDABLE';
 
+function randomlyChoose<T>(options: T[]): T {
+  const index = Math.floor(Math.random() * options.length);
+  return options[index];
+}
+
 export class ContactCardEmbeddableFactory extends EmbeddableFactory<ContactCardEmbeddableInput> {
   constructor() {
     super({
@@ -48,7 +53,11 @@ export class ContactCardEmbeddableFactory extends EmbeddableFactory<ContactCardE
       case 'Lannister':
         return Location.KINGS_LANDING;
       default:
-        return Location.BEYOND_THE_WALL;
+        return randomlyChoose([
+          Location.BEYOND_THE_WALL,
+          Location.KINGS_LANDING,
+          Location.WINTERFELL,
+        ]);
     }
   }
 
@@ -61,7 +70,7 @@ export class ContactCardEmbeddableFactory extends EmbeddableFactory<ContactCardE
       case 'Lannister':
         return 'rich';
       default:
-        return 'bored';
+        return randomlyChoose(['bored', 'happy', 'sad', 'vengeful']);
     }
   }
 

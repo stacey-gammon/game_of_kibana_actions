@@ -62,7 +62,7 @@ function getSigilImageUrl(lastName: string) {
     case 'Baratheon':
       return 'https://source.unsplash.com/KhyOccNSSrg/400x100';
     default:
-      return 'https://source.unsplash.com/400x100/?Mockingbird';
+      return 'https://source.unsplash.com/400x100/?Animal';
   }
 }
 

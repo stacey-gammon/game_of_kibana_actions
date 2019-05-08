@@ -17,8 +17,14 @@
  * under the License.
  */
 
-import { triggerRegistry, CONTEXT_MENU_TRIGGER } from '../../triggers';
-import { Action, ActionContext, ExecuteActionContext, actionRegistry } from '../../actions';
+import {
+  Action,
+  ActionContext,
+  ExecuteActionContext,
+  actionRegistry,
+  triggerRegistry,
+  CONTEXT_MENU_TRIGGER,
+} from 'plugins/embeddable_api/index';
 import { ContactCardEmbeddable } from '../embeddables';
 import { CONTACT_CARD_EMBEDDABLE } from '../embeddables/contact_card/contact_card_embeddable_factory';
 

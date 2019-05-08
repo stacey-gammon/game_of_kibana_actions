@@ -39,6 +39,6 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
-    "rxjs": "6.2.1"
+    "rxjs": "link:../../node_modules/rxjs"
   }
 }
