@@ -17,9 +17,13 @@
  * under the License.
  */
 import { Adapters } from 'ui/inspector';
-import { IContainer } from '../../containers';
-import { EmbeddableOutput, EmbeddableInput, Embeddable } from '../../embeddables';
-import { Filter } from '../../types';
+import {
+  Filter,
+  IContainer,
+  EmbeddableOutput,
+  EmbeddableInput,
+  Embeddable,
+} from 'plugins/embeddable_api/index';
 
 export const FILTERABLE_EMBEDDABLE = 'FILTERABLE_EMBEDDABLE';
 

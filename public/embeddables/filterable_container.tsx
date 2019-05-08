@@ -16,9 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { EmbeddableFactoryRegistry } from '../../embeddables';
-import { Filter } from '../../types';
-import { Container, ContainerInput } from '../../containers';
+import {
+  Filter,
+  Container,
+  EmbeddableFactoryRegistry,
+  ContainerInput,
+} from 'plugins/embeddable_api/index';
 
 export const FILTERABLE_CONTAINER = 'FILTERABLE_CONTAINER';
 

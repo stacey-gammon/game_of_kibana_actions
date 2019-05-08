@@ -18,13 +18,12 @@
  */
 
 import { i18n } from '@kbn/i18n';
+import { embeddableFactories, EmbeddableFactory, IContainer } from 'plugins/embeddable_api/index';
 import {
   FilterableEmbeddable,
   FilterableEmbeddableInput,
   FILTERABLE_EMBEDDABLE,
 } from './filterable_embeddable';
-import { embeddableFactories, EmbeddableFactory } from '../../embeddables';
-import { IContainer } from '../../containers';
 
 export class FilterableEmbeddableFactory extends EmbeddableFactory<FilterableEmbeddableInput> {
   constructor() {

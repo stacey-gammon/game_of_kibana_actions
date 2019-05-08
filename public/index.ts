@@ -20,7 +20,7 @@
 export {
   EmptyEmbeddable,
   ContactCardEmbeddableFactory,
-  GREETING_EMBEDDABLE,
+  CONTACT_CARD_EMBEDDABLE,
   ContactCardEmbeddable,
   ContactCardEmbeddableInput,
   ContactCardEmbeddableOutput,

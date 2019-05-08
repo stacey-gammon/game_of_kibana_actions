@@ -23,6 +23,7 @@ import {
   EuiFlexItem,
   EuiFlexGroup,
   EuiFormRow,
+  // @ts-ignore
   EuiSuperSelect,
 } from '@elastic/eui';
 
@@ -76,8 +77,8 @@ export class ContactCardEmbeddableComponent extends React.Component<Props, State
   componentDidMount() {
     this.mounted = true;
     this.subscription = Rx.merge(
-      this.props.embeddable.getOutput$(),
-      this.props.embeddable.getInput$()
+      this.props.embeddable.getInput$(),
+      this.props.embeddable.getOutput$()
     ).subscribe(() => {
       if (this.mounted) {
         this.setState({

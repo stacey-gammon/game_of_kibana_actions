@@ -38,5 +38,7 @@
     "prettier": "^1.14.3",
     "typescript": "^3.3.3333"
   },
-  "dependencies": {}
+  "dependencies": {
+    "rxjs": "6.2.1"
+  }
 }

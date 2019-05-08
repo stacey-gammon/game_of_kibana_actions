@@ -17,8 +17,13 @@
  * under the License.
  */
 
+import {
+  Action,
+  ActionContext,
+  ExecuteActionContext,
+  actionRegistry,
+} from 'plugins/embeddable_api/index';
 import { Location } from '../embeddables/contact_card';
-import { Action, ActionContext, ExecuteActionContext, actionRegistry } from '../../actions';
 import { ContactCardEmbeddable } from '../embeddables';
 import { CONTACT_CARD_EMBEDDABLE } from '../embeddables/contact_card/contact_card_embeddable_factory';
 
