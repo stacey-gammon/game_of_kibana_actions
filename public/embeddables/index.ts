@@ -23,5 +23,4 @@ export {
   GotCharacterCardEmbeddableOutput,
   GotCharacterCardInitializerProps,
   GOT_CHARACTER_CARD_EMBEDDABLE,
-  GotCharacterCardEmbeddableFactory,
 } from './got_character_card';

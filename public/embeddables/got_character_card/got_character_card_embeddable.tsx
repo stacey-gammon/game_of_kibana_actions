@@ -32,22 +32,6 @@ import { GotCharacterCardEmbeddableComponent } from './got_character_card';
 import { WAR_COUNCIL_ACTION } from '../../actions/war_council_action';
 import { RELOCATE_ACTION } from '../../actions/relocate_action';
 
-export interface GotCharacterCardEmbeddableInput extends EmbeddableInput {
-  firstName: string;
-  lastName: string;
-  nameTitle?: string;
-  isAlive: boolean;
-  mood: string;
-  location: string;
-}
-
-export interface GotCharacterCardEmbeddableOutput extends EmbeddableOutput {
-  fullName: string;
-  sigilImageUrl: string;
-  originalLastName: string;
-  mood: string;
-}
-
 function getFullName(input: GotCharacterCardEmbeddableInput) {
   const { nameTitle, firstName, lastName } = input;
   const nameParts = [nameTitle, firstName, lastName].filter(name => name !== undefined);
@@ -82,6 +66,22 @@ function getOutputMood(input: GotCharacterCardEmbeddableInput) {
   return input.mood;
 }
 
+export interface GotCharacterCardEmbeddableInput extends EmbeddableInput {
+  firstName: string;
+  lastName: string;
+  nameTitle?: string;
+  isAlive: boolean;
+  mood: string;
+  location: string;
+}
+
+export interface GotCharacterCardEmbeddableOutput extends EmbeddableOutput {
+  fullName: string;
+  sigilImageUrl: string;
+  originalLastName: string;
+  mood: string;
+}
+
 export class GotCharacterCardEmbeddable extends Embeddable<
   GotCharacterCardEmbeddableInput,
   GotCharacterCardEmbeddableOutput
@@ -98,6 +98,7 @@ export class GotCharacterCardEmbeddable extends Embeddable<
         originalLastName: initialInput.lastName,
         sigilImageUrl: getSigilImageUrl(initialInput.lastName),
         mood: getOutputMood(initialInput),
+        defaultTitle: `Hello ${getFullName(initialInput)}`,
       },
       parent
     );
@@ -107,8 +108,8 @@ export class GotCharacterCardEmbeddable extends Embeddable<
       this.updateOutput({
         fullName,
         sigilImageUrl: getSigilImageUrl(this.input.lastName),
-        title: `Hello ${fullName}`,
-        mood: getOutputMood(initialInput),
+        defaultTitle: `Hello ${fullName}`,
+        mood: getOutputMood(this.input),
       });
     });
   }

@@ -23,10 +23,7 @@ export {
   GotCharacterCardEmbeddableOutput,
 } from './got_character_card_embeddable';
 
-export {
-  GotCharacterCardEmbeddableFactory,
-  GOT_CHARACTER_CARD_EMBEDDABLE,
-} from './got_character_card_embeddable_factory';
+export { GOT_CHARACTER_CARD_EMBEDDABLE } from './got_character_card_embeddable_factory';
 export { GotCharacterCardInitializerProps } from './got_character_card_initializer';
 
 export { Location } from './got_character_card';

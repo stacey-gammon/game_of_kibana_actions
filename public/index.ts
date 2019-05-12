@@ -18,7 +18,6 @@
  */
 
 export {
-  GotCharacterCardEmbeddableFactory,
   GOT_CHARACTER_CARD_EMBEDDABLE,
   GotCharacterCardEmbeddable,
   GotCharacterCardEmbeddableInput,

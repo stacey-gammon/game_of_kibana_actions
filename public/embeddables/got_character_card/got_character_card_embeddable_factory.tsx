@@ -36,50 +36,48 @@ function randomlyChoose<T>(options: T[]): T {
   return options[index];
 }
 
-export class GotCharacterCardEmbeddableFactory extends EmbeddableFactory<
-  GotCharacterCardEmbeddableInput
-> {
+function getDefaultLocation(lastName?: string) {
+  switch (lastName) {
+    case 'Stark':
+      return Location.WINTERFELL;
+    case 'Targaryen':
+      return Location.KINGS_LANDING;
+    case 'Lannister':
+      return Location.KINGS_LANDING;
+    default:
+      return randomlyChoose([
+        Location.BEYOND_THE_WALL,
+        Location.KINGS_LANDING,
+        Location.WINTERFELL,
+      ]);
+  }
+}
+
+function getDefaultMood(lastName?: string) {
+  switch (lastName) {
+    case 'Stark':
+      return 'cold';
+    case 'Targaryen':
+      return 'hot';
+    case 'Lannister':
+      return 'rich';
+    default:
+      return randomlyChoose(['bored', 'happy', 'sad', 'vengeful']);
+  }
+}
+
+class GotCharacterCardEmbeddableFactory extends EmbeddableFactory<GotCharacterCardEmbeddableInput> {
   public readonly type = GOT_CHARACTER_CARD_EMBEDDABLE;
 
   public isEditable() {
     return true;
   }
 
-  public getDefaultLocation(lastName?: string) {
-    switch (lastName) {
-      case 'Stark':
-        return Location.WINTERFELL;
-      case 'Targaryen':
-        return Location.KINGS_LANDING;
-      case 'Lannister':
-        return Location.KINGS_LANDING;
-      default:
-        return randomlyChoose([
-          Location.BEYOND_THE_WALL,
-          Location.KINGS_LANDING,
-          Location.WINTERFELL,
-        ]);
-    }
-  }
-
-  public getDefaultMood(lastName?: string) {
-    switch (lastName) {
-      case 'Stark':
-        return 'cold';
-      case 'Targaryen':
-        return 'hot';
-      case 'Lannister':
-        return 'rich';
-      default:
-        return randomlyChoose(['bored', 'happy', 'sad', 'vengeful']);
-    }
-  }
-
   public getDefaultInput(partial: Partial<GotCharacterCardEmbeddableInput>) {
     return {
       isAlive: true,
-      mood: this.getDefaultMood(partial.lastName),
-      location: this.getDefaultLocation(partial.lastName),
+      mood: getDefaultMood(partial.lastName),
+      location: getDefaultLocation(partial.lastName),
     };
   }
 
